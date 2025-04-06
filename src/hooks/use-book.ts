@@ -5,8 +5,9 @@ let listeners = [] as any[];
 let store = {
   loaded: false,
   book: {} as BookStore["book"],
-  showControls: true,
+  showControls: false,
 } as BookStore;
+let timer = null as any;
 
 const bookStore = {
   subscribe(listener: any) {
@@ -43,8 +44,15 @@ export const bookActions: BookActions = {
     window.addEventListener(
       "click",
       () => {
+        if (timer) clearTimeout(timer);
+        
         store = { ...store, showControls: true };
         emitChange();
+
+        timer = setTimeout(() => {
+          store = {...store, showControls: false};
+          emitChange();
+        }, 2000);
       },
       { signal: ac.signal },
     );

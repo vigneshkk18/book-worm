@@ -1,29 +1,23 @@
-import { ArrowLeft, EyeClosed, Moon, Sun } from "lucide-react";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
-import { bookActions, useBook } from "@/hooks/use-book";
+import { useBook } from "@/hooks/use-book";
 import { useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useTheme } from "./theme-provider";
-import { useMobile } from "@/hooks/use-mobile";
 
 function BookHeader() {
   const { theme, setTheme } = useTheme();
   const [, navigate] = useLocation();
   const { book, loaded, showControls } = useBook();
-  const isMobile = useMobile();
 
   if (!loaded) return null;
 
   return (
     <div
       className={cn(
-        "flex items-center justify-between px-4 py-2 border-b bg-background/95 backdrop-blur-sm z-10 transition-all duration-300 w-full",
-        isMobile && !showControls && "-translate-y-full",
+        "flex fixed top-0 items-center justify-between px-4 py-2 border-b bg-background/95 backdrop-blur-sm z-10 transition-all duration-300 w-full",
+        !showControls && "-translate-y-full",
       )}
-      style={{
-        position: isMobile ? "fixed" : 'relative',
-        top: 0
-      }}
     >
       <div className="flex items-center">
         <Button
@@ -43,11 +37,6 @@ function BookHeader() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon"
-          className="rounded-full aspect-square"
-          onClick={() => bookActions.setControlsDisplay(false)}>
-          <EyeClosed className="h-5 w-5" />
-        </Button>
         <Button
           variant="ghost"
           size="icon"
