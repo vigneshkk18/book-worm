@@ -5,7 +5,7 @@ let listeners = [] as any[];
 let store = {
   loaded: false,
   book: {} as BookStore["book"],
-  showControls: false,
+  showControls: true,
 } as BookStore;
 
 const bookStore = {
@@ -43,7 +43,7 @@ export const bookActions: BookActions = {
     window.addEventListener(
       "click",
       () => {
-        store = { ...store, showControls: !store.showControls };
+        store = { ...store, showControls: true };
         emitChange();
       },
       { signal: ac.signal },
@@ -89,6 +89,10 @@ export const bookActions: BookActions = {
     if (!store.loaded || store.book.currentPage >= store.book.totalPages)
       return;
     bookActions.goToPage(+1);
+  },
+  setControlsDisplay(show: boolean) {
+    store = {...store, showControls: show};
+    emitChange();
   },
   get canGoToPrevPage() {
     return store.loaded && store.book.currentPage > 1;

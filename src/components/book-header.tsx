@@ -4,11 +4,13 @@ import { useBook } from "@/hooks/use-book";
 import { useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useTheme } from "./theme-provider";
+import { useMobile } from "@/hooks/use-mobile";
 
 function BookHeader() {
   const { theme, setTheme } = useTheme();
   const [, navigate] = useLocation();
-  const { book, loaded } = useBook();
+  const { book, loaded, showControls } = useBook();
+  const isMobile = useMobile();
 
   if (!loaded) return null;
 
@@ -16,7 +18,12 @@ function BookHeader() {
     <div
       className={cn(
         "flex items-center justify-between px-4 py-2 border-b bg-background/95 backdrop-blur-sm z-10 transition-all duration-300 w-full",
+        isMobile && !showControls && "-translate-y-full",
       )}
+      style={{
+        position: isMobile ? "fixed" : 'relative',
+        top: 0
+      }}
     >
       <div className="flex items-center">
         <Button

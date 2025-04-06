@@ -15,7 +15,7 @@ function useBooks() {
     localStorage.setItem("bw-books", JSON.stringify(updatedBooks));
     cacheFile(file, `/books/get/${book.id}.pdf`);
     const blob = dataURLToBlob(coverUrl);
-    console.log(blob);
+
     cacheFile(
       new File([blob], "thumbnail.png", {
         type: blob.type,

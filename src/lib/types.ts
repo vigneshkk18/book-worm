@@ -15,6 +15,7 @@ export type BookActions = {
   goToPage: (by: number) => void;
   loadBook: (id: string) => void;
   jumpToPage: (page: number) => void;
+  setControlsDisplay: (show: boolean) => void;
   get canGoToPrevPage(): boolean;
   get canGoToNextPage(): boolean;
 };
