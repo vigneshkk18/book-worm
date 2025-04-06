@@ -1,6 +1,6 @@
-import { ArrowLeft, Moon, Sun } from "lucide-react";
+import { ArrowLeft, EyeClosed, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
-import { useBook } from "@/hooks/use-book";
+import { bookActions, useBook } from "@/hooks/use-book";
 import { useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useTheme } from "./theme-provider";
@@ -43,6 +43,11 @@ function BookHeader() {
         </div>
       </div>
       <div className="flex items-center gap-2">
+        <Button variant="ghost" size="icon"
+          className="rounded-full aspect-square"
+          onClick={() => bookActions.setControlsDisplay(false)}>
+          <EyeClosed className="h-5 w-5" />
+        </Button>
         <Button
           variant="ghost"
           size="icon"
