@@ -43,11 +43,11 @@ function BookHeader() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {isMobile && <Button variant="ghost" size="icon"
+        <Button variant="ghost" size="icon"
           className="rounded-full aspect-square"
           onClick={() => bookActions.setControlsDisplay(false)}>
           <EyeClosed className="h-5 w-5" />
-        </Button>}
+        </Button>
         <Button
           variant="ghost"
           size="icon"
